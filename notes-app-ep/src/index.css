@@ -13,6 +13,7 @@ code {
 }
 .container{
   max-width: 960px;
+  min-height: 100vh;
   margin-right: auto;
   margin-left: auto;
   padding-right: 15px;
@@ -32,6 +33,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  white-space: pre-wrap;
 }
 .note.new{
   background-color: #67d7cc;
@@ -59,4 +61,41 @@ textarea:focus{
 .save:hover{
   background-color: #ededed;
   cursor: pointer;
+}
+.delete-icon{
+  cursor: pointer;
+}
+.search{
+  display: flex;
+  align-items: center;
+  background-color: rgb(218, 218, 210);
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 1.5em;
+}
+.search input{
+  border: none;
+  resize: none;
+  background-color: rgb(218, 218, 210);
+}
+.search input:focus{
+  outline: none;
+}
+.toggle{
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+
+}
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dark-mode{
+  background-color: rgb(59, 57, 57);
+}
+.dark-mode h1{
+  color: white;
 }
