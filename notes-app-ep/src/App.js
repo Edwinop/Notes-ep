@@ -5,28 +5,7 @@ import Search from './components/Search';
 import Header from './components/Header';
 
 const App = () => {
-	const [notes, setNotes] = useState([
-		{
-			id: nanoid(),
-			text: 'This is my first note!',
-			date: '15/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my second note!',
-			date: '21/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my third note!',
-			date: '28/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my new note!',
-			date: '30/04/2021',
-		},
-	]);
+	const [notes, setNotes] = useState([]);
 
 	const [searchText, setSearchText] = useState('');
 
@@ -49,12 +28,13 @@ const App = () => {
 		);
 	}, [notes]);
 
-	const addNote = (text) => {
+	const addNote = (text,color) => {
 		const date = new Date();
 		const newNote = {
 			id: nanoid(),
 			text: text,
 			date: date.toLocaleDateString(),
+			color: color
 		};
 		const newNotes = [...notes, newNote];
 		setNotes(newNotes);
