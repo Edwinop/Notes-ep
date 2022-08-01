@@ -15,6 +15,7 @@ const AddNote = ({ handleAddNote }) => {
         if (noteText.trim().length > 0) {
             handleAddNote(noteText, color)
             setNoteText('')
+            setColor('#67d7cc')
         }
     }
     const handleColorClick = (color) => {
