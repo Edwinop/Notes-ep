@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import NotesList from './components/NotesList';
-import FoldersList from './components/FolderList';
+//import FoldersList from './components/FolderList';
 import Search from './components/Search';
 import { MdStickyNote2 } from 'react-icons/md'
 
@@ -67,7 +67,7 @@ const App = () => {
 		);
 	}, [folders]);
 
-	const addFolder = (title) => {
+	/*const addFolder = (title) => {
 		const newFolder = {
 			folderid: nanoid(),
 			title: title,
@@ -78,7 +78,7 @@ const App = () => {
 	const deleteFolder = (folderid) => {
 		const newFolders = folders.filter((folder) => folder.folderid !== folderid);
 		setFolders(newFolders);
-	};
+	};*/
 	return (
 		<div className={`${darkMode ? 'dark-mode' : 'light-mode'}`}>
 			<div className="header">
