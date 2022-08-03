@@ -34,12 +34,12 @@ const AddNote = ({ handleAddNote }) => {
             {visible && <center>
                 <div className='color-container'>
                     <div className='color-options'>
-                        <div class="item--1" onClick={()=> handleColorClick('#ab82d4')}></div>
-                        <div class="item--2" onClick={()=> handleColorClick('#FEC8D8')}></div>
-                        <div class="item--3" onClick={()=> handleColorClick('#FFDFD3')}></div>
-                        <div class="item--4" onClick={()=> handleColorClick('#4DBCF0')}></div>
-                        <div class="item--5" onClick={()=> handleColorClick('#FEC184')}></div>
-                        <div class="item--6" onClick={()=> handleColorClick('#F07878')}></div>
+                        <div className="item--1" onClick={()=> handleColorClick('#ab82d4')}></div>
+                        <div className="item--2" onClick={()=> handleColorClick('#FEC8D8')}></div>
+                        <div className="item--3" onClick={()=> handleColorClick('#FFDFD3')}></div>
+                        <div className="item--4" onClick={()=> handleColorClick('#4DBCF0')}></div>
+                        <div className="item--5" onClick={()=> handleColorClick('#FEC184')}></div>
+                        <div className="item--6" onClick={()=> handleColorClick('#F07878')}></div>
                     </div>
                 </div>
             </center> }

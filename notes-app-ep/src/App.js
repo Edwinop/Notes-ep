@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import NotesList from './components/NotesList';
+import FoldersList from './components/FolderList';
 import Search from './components/Search';
-import Header from './components/Header';
+import { MdStickyNote2 } from 'react-icons/md'
+
+
+ 
 
 const App = () => {
+	const [visible, setVisible] = useState(false);
 	const [notes, setNotes] = useState([]);
-
+	const [folders, setFolders] = useState([]);
 	const [searchText, setSearchText] = useState('');
 
 	const [darkMode, setDarkMode] = useState(false);
@@ -28,7 +33,7 @@ const App = () => {
 		);
 	}, [notes]);
 
-	const addNote = (text,color) => {
+	const addNote = (text, color) => {
 		const date = new Date();
 		const newNote = {
 			id: nanoid(),
@@ -45,18 +50,63 @@ const App = () => {
 		setNotes(newNotes);
 	};
 
+	useEffect(() => {
+		const savedFolders = JSON.parse(
+			localStorage.getItem('folder-app-data')
+		);
+
+		if (savedFolders) {
+			setFolders(savedFolders);
+		}
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem(
+			'folder-app-data',
+			JSON.stringify(folders)
+		);
+	}, [folders]);
+
+	const addFolder = (title) => {
+		const newFolder = {
+			folderid: nanoid(),
+			title: title,
+		};
+		const newFolders = [...folders, newFolder];
+		setFolders(newFolders);
+	};
+	const deleteFolder = (folderid) => {
+		const newFolders = folders.filter((folder) => folder.folderid !== folderid);
+		setFolders(newFolders);
+	};
 	return (
-		<div className={`${darkMode && 'dark-mode'}`}>
-			<div className='container'>
-				<Header handleToggleDarkMode={setDarkMode} />
+		<div className={`${darkMode ? 'dark-mode' : 'light-mode'}`}>
+			<div className="header">
+				<MdStickyNote2 className='brand-icon' size='2em' onClick={() => setVisible(!visible)} />
+				<h1 style={{fontSize: '2.5rem'}}>Notes</h1>
 				<Search handleSearchNote={setSearchText} />
-				<NotesList
-					notes={notes.filter((note) =>
-						note.text.toLowerCase().includes(searchText)
-					)}
-					handleAddNote={addNote}
-					handleDeleteNote={deleteNote}
-				/>
+				<button onClick={() => setDarkMode(!darkMode)} className="toggle">Toggle Mode</button>
+			</div>
+			<div className='container'>
+				{/*<div className='folder-container'>
+					<span style={{fontWeight: 600}}>Folders</span>
+					<br></br>
+					
+					<FoldersList
+						folders={folders}
+						handleAddFolder={addFolder}
+						handleDeleteFolder={deleteFolder}
+					/>
+				</div>*/}
+				<div className='note-container'>
+					<NotesList
+						notes={notes.filter((note) =>
+							note.text.toLowerCase().includes(searchText)
+						)}
+						handleAddNote={addNote}
+						handleDeleteNote={deleteNote}
+					/>
+				</div>
 			</div>
 		</div>
 	);

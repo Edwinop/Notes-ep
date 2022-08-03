@@ -11,17 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 .container {
-  max-width: 960px;
+  position: relative;
+  max-width: 130vh;
   min-height: 100vh;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: 25vh;
   padding-right: 15px;
   padding-left: 15px;
+  z-index: 1;
 }
 
 .notes-list {
+  margin-top: 5vh;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -37,8 +39,6 @@ code {
   justify-content: space-between;
   white-space: pre-wrap;
 }
-
-
 
 textarea {
   border: none;
@@ -74,9 +74,105 @@ textarea:focus {
 }
 
 .delete-icon {
+  align-items: center;
   cursor: pointer;
 }
 
+.folder-delete-icon {
+  color: gray;
+  align-items: center;
+  cursor: pointer;
+}
+.folder-delete-icon:hover {
+  color: black;
+  align-items: center;
+  cursor: pointer;
+}
+
+.brand-icon {
+  align-items: center;
+  margin: 10px 10px;
+  color:#3792c0;
+  border-radius: 8px;
+  padding: 5px 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+.folder-icon {
+  align-items: center;
+  margin: 10px 10px;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+.folder-icon-dark {
+  float: left;
+  margin: 10px 10px;
+  background-color: rgb(221, 140, 140);
+  border-radius: 8px;
+  padding: 8px 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.folder-container {
+  margin-top: 3vh;
+  margin-bottom: 2vh;
+  border-radius: 8px;
+  background-color: rgb(247, 245, 245);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 1rem;
+  border-radius: 12px;
+  position: relative;
+  max-width: 130vh;
+  min-height: .5vh;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  z-index: 1;
+}
+.folders-list {
+  margin-top: 10px;
+  display: grid;
+  grid-gap: 1rem;
+  flex-direction: row;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.folder {
+  background-color: #e4dede;
+  text-align: center;
+  border-radius: 8px;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 10px;
+  padding: .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.folder-title{
+  color: black;
+  cursor: pointer;
+}
+
+.folder-new {
+  text-align: center;
+  border-radius: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.folder-title{
+  cursor: pointer;
+}
 .color-icon {
   margin-right: 2rem;
   cursor: pointer;
@@ -158,12 +254,15 @@ textarea:focus {
 }
 
 .search {
+  margin-top: 1vh;
+  margin-left: 5.2rem;
+  height: 3vh;
+  width: 60vh;
   display: flex;
-  align-items: center;
   background-color: rgb(218, 218, 210);
   border-radius: 10px;
   padding: 5px;
-  margin-bottom: 1.5em;
+  align-items: center;
 }
 
 .search input {
@@ -181,17 +280,22 @@ textarea:focus {
   border: none;
   border-radius: 15px;
   padding: 5px 10px 5px 10px;
-
+  margin-left: 60vh;
+  margin-top: 1vh;
 }
 
 .header {
   display: flex;
+  flex-direction:row;
   align-items: center;
-  justify-content: space-between;
 }
 
 .dark-mode {
   background-color: rgb(59, 57, 57);
+}
+
+.light-mode {
+  background-color: rgb(247, 245, 245);
 }
 
 .dark-mode h1 {
