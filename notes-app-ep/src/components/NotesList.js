@@ -8,6 +8,7 @@ const NotesList = ({notes,handleAddNote,handleDeleteNote,}) => {
 				<Note
 					id={note.id}
 					text={note.text}
+					folder={note.folder}
 					date={note.date}
 					color={note.color}
 					handleDeleteNote={handleDeleteNote}

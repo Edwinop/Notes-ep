@@ -4,17 +4,20 @@ import NotesList from './components/NotesList';
 //import FoldersList from './components/FolderList';
 import Search from './components/Search';
 import { MdStickyNote2 } from 'react-icons/md'
-
-
- 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const App = () => {
 	const [visible, setVisible] = useState(false);
 	const [notes, setNotes] = useState([]);
 	const [folders, setFolders] = useState([]);
 	const [searchText, setSearchText] = useState('');
+	const [searchfolder, setSearchFolder] = useState('');
 
 	const [darkMode, setDarkMode] = useState(false);
+	//const folderlist = notes.filter(notes => notes.folder);
 
 	useEffect(() => {
 		const savedNotes = JSON.parse(
@@ -33,17 +36,26 @@ const App = () => {
 		);
 	}, [notes]);
 
-	const addNote = (text, color) => {
+	const addNote = (text, color, folder) => {
 		const date = new Date();
 		const newNote = {
 			id: nanoid(),
 			text: text,
 			date: date.toLocaleDateString(),
-			color: color
+			color: color,
+			folder: folder
 		};
 		const newNotes = [...notes, newNote];
 		setNotes(newNotes);
 	};
+	const uniqueFolders = notes.reduce((acc, current) => {
+		const x = acc.find(item => item.folder === current.folder);
+		if (!x) {
+		  return acc.concat([current]);
+		} else {
+		  return acc;
+		}
+	  }, []);
 
 	const deleteNote = (id) => {
 		const newNotes = notes.filter((note) => note.id !== id);
@@ -86,6 +98,26 @@ const App = () => {
 				<h1 style={{fontSize: '2.5rem'}}>Notes</h1>
 				<Search handleSearchNote={setSearchText} />
 				<button onClick={() => setDarkMode(!darkMode)} className="toggle">Toggle Mode</button>
+				<FormControl sx={{
+                        m: 1, minWidth: 160, '& .MuiInputBase-root': {
+                            borderRadius: '12px'
+                        },
+                    }}>
+                        <InputLabel id="demo-simple-select-autowidth-label">Folders</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-autowidth-label"
+                            id="demo-simple-select-autowidth"
+                            value={searchfolder}
+                            onChange={(e) => setSearchFolder(e.target.value)}
+                            autoWidth
+                            label="Folders"
+                        >
+							<MenuItem value=''><em>None</em></MenuItem>
+                            {uniqueFolders.map((uniqueFolder) => (
+                                <MenuItem value={uniqueFolder.folder}>{uniqueFolder.folder}</MenuItem>
+                            ))}
+                        </Select>
+				</FormControl>
 			</div>
 			<div className='container'>
 				{/*<div className='folder-container'>
@@ -101,8 +133,9 @@ const App = () => {
 				<div className='note-container'>
 					<NotesList
 						notes={notes.filter((note) =>
-							note.text.toLowerCase().includes(searchText)
+							note.folder.toLowerCase().includes(searchfolder) && note.text.toLowerCase().includes(searchText) 
 						)}
+
 						handleAddNote={addNote}
 						handleDeleteNote={deleteNote}
 					/>

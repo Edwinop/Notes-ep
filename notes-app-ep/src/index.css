@@ -177,6 +177,9 @@ textarea:focus {
   margin-right: 2rem;
   cursor: pointer;
 }
+.folder-icon {
+  cursor: pointer;
+}
 
 .color-container {
   display: flex;
