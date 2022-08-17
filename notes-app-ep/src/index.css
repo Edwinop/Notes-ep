@@ -68,7 +68,11 @@ textarea:focus {
   background-color: #ededed;
   cursor: pointer;
 }
-
+.form-control{
+  margin: 1;
+  min-width: 120; 
+  margin-bottom: '30px';
+}
 .character-limit {
   justify-content: left;
 }
@@ -78,16 +82,6 @@ textarea:focus {
   cursor: pointer;
 }
 
-.folder-delete-icon {
-  color: gray;
-  align-items: center;
-  cursor: pointer;
-}
-.folder-delete-icon:hover {
-  color: black;
-  align-items: center;
-  cursor: pointer;
-}
 
 .brand-icon {
   align-items: center;
@@ -98,89 +92,18 @@ textarea:focus {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
 }
-.folder-icon {
-  align-items: center;
-  margin: 10px 10px;
-  padding: 5px 5px;
-  cursor: pointer;
-}
-.folder-icon-dark {
-  float: left;
-  margin: 10px 10px;
-  background-color: rgb(221, 140, 140);
-  border-radius: 8px;
-  padding: 8px 8px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  cursor: pointer;
-}
 
-.folder-container {
-  margin-top: 3vh;
-  margin-bottom: 2vh;
-  border-radius: 8px;
-  background-color: rgb(247, 245, 245);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 1rem;
-  border-radius: 12px;
-  position: relative;
-  max-width: 130vh;
-  min-height: .5vh;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 15px;
-  padding-left: 15px;
-  z-index: 1;
-}
-.folders-list {
-  margin-top: 10px;
-  display: grid;
-  grid-gap: 1rem;
-  flex-direction: row;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-.folder {
-  background-color: #e4dede;
-  text-align: center;
-  border-radius: 8px;
-  align-items: center;
-  width: fit-content;
-  margin-bottom: 10px;
-  padding: .5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.folder-title{
-  color: black;
-  cursor: pointer;
-}
-
-.folder-new {
-  text-align: center;
-  border-radius: 12px;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: .5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.folder-title{
-  cursor: pointer;
-}
 .color-icon {
   margin-right: 2rem;
   cursor: pointer;
 }
-.folder-icon {
+
+.create-folder{
   cursor: pointer;
 }
-
+.delete-folder{
+  cursor: pointer;
+}
 .color-container {
   display: flex;
   align-items: center;
@@ -279,11 +202,6 @@ textarea:focus {
 }
 
 .toggle {
-  background-color: #e1e1e1;
-  border: none;
-  border-radius: 15px;
-  padding: 5px 10px 5px 10px;
-  margin-left: 60vh;
   margin-top: 1vh;
 }
 
@@ -291,6 +209,7 @@ textarea:focus {
   display: flex;
   flex-direction:row;
   align-items: center;
+  
 }
 
 .dark-mode {

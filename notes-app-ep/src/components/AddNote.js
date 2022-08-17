@@ -4,12 +4,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-const AddNote = ({ handleAddNote }) => {
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+const AddNote = ({ handleAddNote, uniqueFolder }) => {
     const [visible, setVisible] = useState(false);
     const [visibleCreateFolder, setVisibleCreateFolder] = useState(false);
     const [noteText, setNoteText] = useState('')
     const [folderText, setFolderText] = useState('')
-    const [folder, setFolder] = useState('main')
+    const [folder, setFolder] = useState('')
     const [color, setColor] = useState('#67d7cc');
     const characterLimit = 200;
     const handleChange = (event) => {
@@ -28,6 +30,7 @@ const AddNote = ({ handleAddNote }) => {
     const handleSaveClick = () => {
         if (noteText.trim().length > 0) {
             handleAddNote(noteText, color, folder)
+            console.log(folder)
             setNoteText('')
             setColor('#67d7cc')
             setFolder('')
@@ -36,63 +39,38 @@ const AddNote = ({ handleAddNote }) => {
     const handleColorClick = (color) => {
         setColor(color);
     };
-    const options = [
-        {
-            label: "Main",
-            value: "main",
-        },
-        {
-            label: "Apple",
-            value: "apple",
-        },
-        {
-            label: "Mango",
-            value: "mango",
-        },
-        {
-            label: "Banana",
-            value: "banana",
-        },
-        {
-            label: "Pineapple",
-            value: "pineapple",
-        },
-    ];
-
     return (
         <div className='note new' style={{ backgroundColor: `${color}` }}>
             <div className='select-folder'>
-                    <FormControl sx={{
-                        m: 1, minWidth: 160, '& .MuiInputBase-root': {
-                            borderRadius: '12px'
-                        },
-                    }}>
-                        <InputLabel id="demo-simple-select-autowidth-label">Folders</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-autowidth-label"
-                            id="demo-simple-select-autowidth"
-                            value={folder}
-                            onChange={(e) => setFolder(e.target.value)}
-                            autoWidth
-                            label="Folders"
-                        >
-                            {options.map((option) => (
-                                <MenuItem value={option.value}>{option.label}</MenuItem>
-                            ))}
-                            <MenuItem onClick={setVisibleCreateFolder}>Create Folder</MenuItem>
-                        </Select>
-                        {/*{visibleCreateFolder &&
-                            <>
-                                <textarea
-                                    rows='1'
-                                    placeholder='Type a Folder'
-                                    value={folderText}
-                                    onChange={handleChangeFolder}>
-                                </textarea>
-                                <div onClick={setVisibleCreateFolder}> create</div>
-                            </>
-                        }*/}
-                    </FormControl>
+                <FormControl sx={{
+                    m: 0, p: 1, minWidth: 100, '& .MuiInputBase-root': {
+                        height: 40
+                    },
+                }}>
+                    <InputLabel id="demo-simple-select-autowidth-label">Folders</InputLabel>
+                    <Select
+                        id="demo-simple-select-autowidth"
+                        value={folder}
+                        onChange={(e) => setFolder(e.target.value)}
+                        autoWidth
+                    >
+                        <MenuItem value=''><em>None</em></MenuItem>
+                        {uniqueFolder.map((folderlist) => (
+                            <MenuItem value={folderlist}>{folderlist}</MenuItem>
+                        ))}
+                    </Select>
+                    {visibleCreateFolder &&
+                        <>
+                            <textarea
+                                rows='1'
+                                placeholder='Type a Folder'
+                                value={folderText}
+                                onChange={handleChangeFolder}>
+                            </textarea>
+                            <div onClick={setVisibleCreateFolder}> create</div>
+                        </>
+                    }
+                </FormControl>
             </div>
             <textarea
                 rows='8'
@@ -117,7 +95,9 @@ const AddNote = ({ handleAddNote }) => {
             <div className="note-footer">
                 <small className='character-limit'>{characterLimit - noteText.length} remaining</small>
                 <MdOutlineFormatColorFill onClick={() => setVisible(!visible)} className='color-icon' size='1.3em' />
-                <button className="save" onClick={handleSaveClick}>Save</button>
+                <Fab color="primary" size='small' onClick={handleSaveClick} aria-label="add">
+                    <AddIcon />
+                </Fab>
             </div>
         </div>
     )

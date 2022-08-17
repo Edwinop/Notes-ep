@@ -1,5 +1,4 @@
 import { MdDeleteForever } from 'react-icons/md'
-import { MdFolder } from 'react-icons/md'
 const Note = ({id,folder,text,date,color,handleDeleteNote}) => {
     return (
         <>

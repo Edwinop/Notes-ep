@@ -1,10 +1,14 @@
 import Note from './Notes';
 import AddNote from './AddNote';
 
-const NotesList = ({notes,handleAddNote,handleDeleteNote,}) => {
+const NotesList = ({notes,handleAddNote,handleDeleteNote,uniqueFolder}) => {
 	return (
 		<div className='notes-list'>
-			{notes.map((note) => (
+			<AddNote 
+			handleAddNote={handleAddNote} 
+			uniqueFolder={uniqueFolder}
+			/>
+			{notes.reverse().map((note) => (
 				<Note
 					id={note.id}
 					text={note.text}
@@ -12,9 +16,10 @@ const NotesList = ({notes,handleAddNote,handleDeleteNote,}) => {
 					date={note.date}
 					color={note.color}
 					handleDeleteNote={handleDeleteNote}
+					
 				/>
 			))}
-			<AddNote handleAddNote={handleAddNote} />
+			
 		</div>
 	);
 };
