@@ -35,23 +35,24 @@ const App = () => {
 	const [deleteFolder, setDeleteFolder] = useState('')
 	const [openSnackCreate, setOpenSnackCreate] = useState(false);
 	const [openSnackDelete, setOpenSnackDelete] = useState(false);
+	const [openSnackError, setOpenSnackError] = useState(false);
 
 	const ToggleButton = styled(MuiToggleButton)(({ selectedColor }) => ({
 		'&.MuiButtonBase-root, &.Mui:hover': {
 			color: 'black',
 			backgroundColor: "#d9d3b6",
-		  },
-		'&.Mui-selected, &.Mui-selected:hover': {
-		  color: 'black',
-		  backgroundColor: selectedColor,
 		},
-	  }));
-	const handleClickSnackDelete = () => {
-		setOpenSnackDelete(false)
-	};
-	const handleClickSnackCreate = () => {
+		'&.Mui-selected, &.Mui-selected:hover': {
+			color: 'black',
+			backgroundColor: selectedColor,
+		},
+	}));
+	const handleClickCloseSnack = () => {
+		setOpenSnackDelete(false);
 		setOpenSnackCreate(false);
+		setOpenSnackError(false);
 	};
+
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
@@ -59,11 +60,16 @@ const App = () => {
 		setOpenDelete(true);
 	};
 	const handleClick = () => {
-		const newFolder = [...uniqueFolder, addFolder]
-		setUniqueFolder(newFolder)
-		setOpen(false);
-		setAddFolder('')
-		setOpenSnackCreate(true);
+		if (uniqueFolder.indexOf(addFolder) > -1) {
+			setOpenSnackError(true)
+		} else {
+			const newFolder = [...uniqueFolder, addFolder]
+			setUniqueFolder(newFolder)
+			setOpen(false);
+			setAddFolder('')
+			setOpenSnackCreate(true);
+		}
+
 	};
 
 	const handleClickDelete = () => {
@@ -102,7 +108,7 @@ const App = () => {
 			JSON.stringify(notes)
 		);
 	}, [notes]);
-	
+
 	const addNote = (text, color, folder) => {
 		const date = new Date();
 		const newNote = {
@@ -141,14 +147,20 @@ const App = () => {
 		<div className={`${darkMode ? 'dark-mode' : 'light-mode'}`}>
 			<Snackbar
 				open={openSnackCreate}
-				onClose={handleClickSnackCreate}
+				onClose={handleClickCloseSnack}
 				message="Folder Created"
 				autoHideDuration={6000}
 			/>
 			<Snackbar
 				open={openSnackDelete}
-				onClose={handleClickSnackDelete}
+				onClose={handleClickCloseSnack}
 				message="Folder Deleted"
+				autoHideDuration={6000}
+			/>
+			<Snackbar
+				open={openSnackError}
+				onClose={handleClickCloseSnack}
+				message="No Duplicate Folder"
 				autoHideDuration={6000}
 			/>
 			<Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
@@ -191,43 +203,43 @@ const App = () => {
 				</DialogActions>
 			</Dialog>
 			<div className="header">
-				<MdStickyNote2 className='brand-icon' size='35px'/>
+				<MdStickyNote2 className='brand-icon' size='35px' />
 				<h1 style={{ fontSize: '2.5rem' }}>Post-It</h1>
 				<Search handleSearchNote={setSearchText} />
 				<div className="toggle">
-					<FormControlLabel  onClick={() => setDarkMode(!darkMode)} control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />} label=""/>
+					<FormControlLabel onClick={() => setDarkMode(!darkMode)} control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />} label="" />
 				</div>
 			</div>
 			<div className='container'>
-				<div>			
-						<div className='folder-list'>
+				<div>
+					<div className='folder-list'>
+						<div className='folder'>
+							<ToggleButtonGroup value='' exclusive onChange={(e) => setSearchFolder(e.target.value)}>
+								<ToggleButton selectedColor="#00abc0" value='' >
+									All
+								</ToggleButton>
+							</ToggleButtonGroup>
+						</div>
+						{uniqueFolder?.map((folderlist) => (
 							<div className='folder'>
-								<ToggleButtonGroup value='' exclusive onChange={(e) => setSearchFolder(e.target.value)}>
-									<ToggleButton selectedColor="#00abc0" value='' >
-										All
+								<ToggleButtonGroup value={searchfolder} exclusive onChange={(e) => setSearchFolder(e.target.value)}>
+									<ToggleButton selectedColor="#00abc0" value={folderlist} >
+										{folderlist}
 									</ToggleButton>
 								</ToggleButtonGroup>
 							</div>
-								{uniqueFolder?.map((folderlist) => (
-									<div className='folder'>
-									<ToggleButtonGroup value={searchfolder} exclusive onChange={(e) => setSearchFolder(e.target.value)}>
-										<ToggleButton selectedColor="#00abc0" value={folderlist} >
-											{folderlist}
-										</ToggleButton>
-									</ToggleButtonGroup>
-									</div>
-								))}
-						</div>
-							<div style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
-								<Fab sx={{ m: 1 }} size="small" color="success" aria-label="create" onClick={handleClickOpen}>
-									<CreateNewFolderIcon fontSize="small" className='create-folder' />
-								</Fab>
-								<Fab sx={{ m: 1 }} size="small" color="error" aria-label="delete" onClick={handleClickOpenDelete}>
-									<FolderDeleteIcon fontSize="small" className='delete-folder' />
-								</Fab>
+						))}
+					</div>
+					<div style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
+						<Fab sx={{ m: 1 }} size="small" color="success" aria-label="create" onClick={handleClickOpen}>
+							<CreateNewFolderIcon fontSize="small" className='create-folder' />
+						</Fab>
+						<Fab sx={{ m: 1 }} size="small" color="error" aria-label="delete" onClick={handleClickOpenDelete}>
+							<FolderDeleteIcon fontSize="small" className='delete-folder' />
+						</Fab>
 
-							</div>
-					
+					</div>
+
 				</div>
 				<div className='note-container'>
 					<NotesList
