@@ -200,23 +200,25 @@ const App = () => {
 				</div>
 			</div>
 			<div className='container'>
-				<div style={{ width: 240 }}>
-					<div style={{ display: 'flex', flexDirection: 'row' }}>
-						<FormControl className='form-control' style={{ marginTop: 50 }}>
-							<Stack direction="row" spacing={2} >
+				<div>			
+						<div className='folder-list'>
+							<div className='folder'>
 								<ToggleButtonGroup value='' exclusive onChange={(e) => setSearchFolder(e.target.value)}>
 									<ToggleButton selectedColor="#00abc0" value='' >
 										All
 									</ToggleButton>
 								</ToggleButtonGroup>
+							</div>
 								{uniqueFolder?.map((folderlist) => (
+									<div className='folder'>
 									<ToggleButtonGroup value={searchfolder} exclusive onChange={(e) => setSearchFolder(e.target.value)}>
 										<ToggleButton selectedColor="#00abc0" value={folderlist} >
 											{folderlist}
 										</ToggleButton>
 									</ToggleButtonGroup>
+									</div>
 								))}
-							</Stack>
+						</div>
 							<div style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
 								<Fab sx={{ m: 1 }} size="small" color="success" aria-label="create" onClick={handleClickOpen}>
 									<CreateNewFolderIcon fontSize="small" className='create-folder' />
@@ -226,8 +228,7 @@ const App = () => {
 								</Fab>
 
 							</div>
-						</FormControl>
-					</div>
+					
 				</div>
 				<div className='note-container'>
 					<NotesList

@@ -104,6 +104,17 @@ textarea:focus {
 .delete-folder{
   cursor: pointer;
 }
+.folder-list {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.folder{
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .color-container {
   display: flex;
   align-items: center;
