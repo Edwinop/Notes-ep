@@ -20,6 +20,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { MaterialUISwitch } from './components/Switch';
 import { styled } from '@mui/material/styles';
@@ -148,21 +149,26 @@ const App = () => {
 			<Snackbar
 				open={openSnackCreate}
 				onClose={handleClickCloseSnack}
-				message="Folder Created"
 				autoHideDuration={6000}
-			/>
+			>
+			<SnackbarContent style={{backgroundColor:'green'}}message='Folder Created'/>
+			</Snackbar>
+
 			<Snackbar
 				open={openSnackDelete}
 				onClose={handleClickCloseSnack}
-				message="Folder Deleted"
 				autoHideDuration={6000}
-			/>
+			>
+			<SnackbarContent style={{backgroundColor:'orange'}} message='Folder Deleted'/>
+			</Snackbar>
+
 			<Snackbar
 				open={openSnackError}
 				onClose={handleClickCloseSnack}
-				message="No Duplicate Folder"
 				autoHideDuration={6000}
-			/>
+			><SnackbarContent style={{backgroundColor:'red'}}message='No Duplicate Folder'/>
+			</Snackbar>
+
 			<Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
 				<DialogTitle>Create</DialogTitle>
 				<DialogContent>
