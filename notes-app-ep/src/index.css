@@ -16,7 +16,7 @@ code {
   max-width: 130vh;
   min-height: 100vh;
   margin-right: auto;
-  margin-left: 25vh;
+  margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
   z-index: 1;
@@ -202,6 +202,8 @@ textarea:focus {
 }
 
 .toggle {
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 1vh;
 }
 

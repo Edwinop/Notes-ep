@@ -22,14 +22,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { MaterialUISwitch } from './components/SwitchContext';
+import { MaterialUISwitch } from './components/Switch';
 import { styled } from '@mui/material/styles';
 const App = () => {
 	const [notes, setNotes] = useState([]);
 	const [searchText, setSearchText] = useState('');
 	const [searchfolder, setSearchFolder] = useState('');
 	const [darkMode, setDarkMode] = useState(false);
-	//const folderlist = notes.filter(notes => notes.folder);
 	const [open, setOpen] = React.useState(false);
 	const [openDelete, setOpenDelete] = React.useState(false);
 	const [addFolder, setAddFolder] = useState('');
@@ -196,7 +195,9 @@ const App = () => {
 				<MdStickyNote2 className='brand-icon' size='35px'/>
 				<h1 style={{ fontSize: '2.5rem' }}>Post-It</h1>
 				<Search handleSearchNote={setSearchText} />
-				<FormControlLabel className="toggle" style={{marginLeft: '32vw'}} onClick={() => setDarkMode(!darkMode)} control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />} label=""/>
+				<div className="toggle">
+					<FormControlLabel  onClick={() => setDarkMode(!darkMode)} control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />} label=""/>
+				</div>
 			</div>
 			<div className='container'>
 				<div style={{ width: 240 }}>
